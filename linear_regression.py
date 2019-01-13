@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 
 def differential1(theta, x, y):
         sum = 0.0
-        for i in range(0, 4):
+        for i in range(0, x.size):
                 sum += 2 * x[i] * (theta[0]*x[i] + theta[1] - y[i])
         return sum/8.0
 
 def differential2(theta, x, y):
         sum = 0.0
-        for i in range(0, 4):
+        for i in range(0, x.size):
                 sum += 2 * (theta[0] * x[i] + theta[1] - y[i])
         return sum/8.0
 
@@ -27,8 +27,9 @@ theta = np.array([1.0, 1.0])
 learning_rate = 0.01
 
 #Gradient descent
+e_total = find_error(x, y, theta)
 while True:   
-        prev_e = find_error(x, y, theta)
+        prev_e = e_total
         theta[0] -= learning_rate * differential1(theta, x, y)
         theta[1] -= learning_rate * differential2(theta, x, y)
         e_total = find_error(x, y, theta)
