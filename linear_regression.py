@@ -5,19 +5,19 @@ import matplotlib.pyplot as plt
 def differential1(theta, x, y):
         sum = 0.0
         for i in range(0, x.size):
-                sum += 2 * x[i] * (theta[0]*x[i] + theta[1] - y[i])
-        return sum/8.0
+                sum += 2 * (theta[0] + theta[1]*x[i] - y[i])
+        return sum / (2 * x.size)
 
 def differential2(theta, x, y):
         sum = 0.0
         for i in range(0, x.size):
-                sum += 2 * (theta[0] * x[i] + theta[1] - y[i])
-        return sum/8.0
+                sum += 2 * x[i] * (theta[0] + theta[1]*x[i] - y[i])
+        return sum / (2 * x.size)
 
 def find_error(x, y, theta):
         e = 0
         for i in range(0, x.size):
-                e += (theta[0]*x[i] + theta[1] - y[i])**2
+                e += (theta[0] + theta[1]*x[i] - y[i])**2
         return e
 
 
@@ -41,5 +41,5 @@ print("Total error = " + str(round(e_total, 1)))
 
 
 plt.plot(x, y, "ro")
-plt.plot(x, theta[0]*x + theta[1])
+plt.plot(x, theta[0] + theta[1]*x)
 plt.show()
